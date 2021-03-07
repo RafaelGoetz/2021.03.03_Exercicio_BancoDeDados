@@ -1,0 +1,6 @@
+{
+    "singleQuote": true
+    "trailComma": "es5",
+    "arrowParens": "avoid"
+    
+}
