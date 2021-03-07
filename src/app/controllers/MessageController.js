@@ -31,10 +31,7 @@ class MessageController {
     const { id } = request.params;
     const { content, userUid } = request.body; 
 
-    const idTester = await Message.findByPk(id)
-
-
-    if(content.length > 1 && userUid.length >1 && idTester.length>1){
+    
     const message = await Message.update(
       {
         content,
@@ -47,10 +44,7 @@ class MessageController {
       returning: true,
     });
 
-    response.sendStatus(202);}
-    else {
-      return response.sendStatus(412);
-    }
+    response.sendStatus(202);
   }
   
   async delete(request, response) {
@@ -61,7 +55,8 @@ class MessageController {
         id,
       }
     })
-
+ 
+    console.log(Messsage.findByPk(id), 'aqui')
     return response.sendStatus(202);
   }
 
