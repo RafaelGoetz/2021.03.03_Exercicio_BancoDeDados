@@ -1,4 +1,6 @@
 import User from '../models/User';
+import Message from '../models/Message';
+
 import { Op } from 'sequelize';
 
 class UserController {
@@ -50,14 +52,17 @@ class UserController {
 
   async delete(request, response) {
     const { id } = request.params;
+    const user = await User.findByPk(id);
 
-    await User.destroy({
+    await Message.destroy({
       where: {
-        id,
-      }
-    })
+        user_uid: id,
+      },
+    });
 
-    return response.sendStatus(202);
+    await user.destroy();
+
+    response.sendStatus(202);
   }
 
   async filter(request, response) {
